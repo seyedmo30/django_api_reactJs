@@ -1,0 +1,244 @@
+<<<<<<< HEAD
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+
+{%block style%}
+
+	div.div1{
+	height:75px;
+	margin:5px;
+	margin-bottom:20px;
+	direction:rtl;
+	border:3px ridge gray;
+	border-radius:10px;
+	padding-right:4px;
+	padding-top:8px;
+	}
+
+	div.div2{
+	float:right;
+	margin:10px;
+	margin-left:1px;
+	font-size:20px;
+	font-weight:bold;
+	}
+{%endblock%}
+
+
+
+{% block content %}
+<div class="row">
+
+<div class="col-3 col-s-3 menu">
+  <ul>
+		<form action="{% url 'post_search' %}" method="get" >
+			{{form.as_p}}
+			<input type="submit" value="salam">
+	</form>
+	<br>	<br>	<br>
+		<a href="/contacts">
+    <li>all </li>
+		</a>
+
+		{%for group in groups%}
+		<a href="{{group.get_absolute_url }}">
+    <li>{{group.name}} </li>
+		</a>
+		{% empty %}
+		<li>ابتدا یک گروه بسازید </li>
+		{% endfor %}
+	</ul>
+
+
+
+		<div class="col-6 col-s-3 menu">
+
+					<a href="/add_grp">
+			    <li> add group </li>
+					</a>
+
+		</div>
+			<div class="col-6 col-s-3 menu">
+
+						<a href="/add_grp">
+				    <li> drop group </li>
+						</a>
+
+			</div>
+</div>
+<div style="direction:rtl"  class="col-6 col-s-9">
+  <h1>خوش آمدید</h1>
+
+
+  <p>در این سایت شما می توانید شماره تلفن و ایمیل مورد نظر را ذخیره کنید.</p>
+	<div >
+
+<a href="{% url 'add'%}">
+	<div class="div1" style="background-color:pink;text-align: center;font-size:40px;">
+<b>افزودن + <b>
+</diV></a>
+
+
+{% if "query" in request.GET %}
+search : {{cd.query}}<br>
+found{{total_results}}<br>
+
+
+{% for result in results %}
+{% with post=result.object %}
+
+
+
+<div class="div1" >
+
+
+			<div style=	"float:left;direction:ltr;border:0px">
+				<img class="photo"{% if post.document %} src="/media/{{post.document}}"{% else %} src="{% static 'default.jpg' %}" {% endif %} alt="rate" width="70" height="60">
+			</div>
+
+
+<div class="div2">
+
+{{post.name}} &nbsp&nbsp{{post.number}} &nbsp&nbsp
+
+<div style="float:left">
+
+	{% if grp_id %}
+  <a href="/contacts/{{grp_id}}/delete/{{post.id}}" >
+		{% else %}
+		<a href="/contacts/delete/{{contact.id}}" >
+		{% endif %}
+		<img class="star" src="{% static 'delete.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+  <a href="{{contact.get_absolute_url}}" ><img class="star" src="{% static 'edit.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+
+</div></div></div>
+
+
+
+
+{% endwith %}
+{% endfor %}
+
+
+{% else %}
+
+
+{% for contact in contacts %}
+<div class="div1" >
+
+
+			<div style=	"float:left;direction:ltr;border:0px">
+				<img class="photo"{% if contact.document %} src="/media/{{contact.document}}"{% else %} src="{% static 'default.jpg' %}" {% endif %} alt="rate" width="70" height="60">
+			</div>
+
+
+<div class="div2">
+
+{{contact.name}} &nbsp&nbsp{{contact.number}} &nbsp&nbsp
+
+<div style="float:left">
+
+	{% if grp_id %}
+  <a href="/contacts/{{grp_id}}/delete/{{contact.id}}" >
+		{% else %}
+		<a href="/contacts/delete/{{contact.id}}" >
+		{% endif %}
+		<img class="star" src="{% static 'delete.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+  <a href="{{contact.get_absolute_url}}" ><img class="star" src="{% static 'edit.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+
+</div></div></div>
+{% empty %}
+ابتدا شماره ی مورد نظر را اضافه کنید
+{% endfor %}
+{% endif %}
+
+{% include "pagination.html" with page=contacts %}
+</div>
+</div>
+
+{%endblock%}
+=======
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+
+{%block style%}
+
+	div.div1{
+	height:75px;
+	margin:5px;
+	margin-bottom:20px;
+	direction:rtl;
+	border:3px ridge gray;
+	border-radius:10px;
+	padding-right:4px;
+	padding-top:8px;
+	}
+
+	div.div2{
+	float:right;
+	margin:10px;
+	margin-left:1px;
+	font-size:20px;
+	font-weight:bold;
+	}
+{%endblock%}
+
+
+
+{% block content %}
+<div class="row">
+
+<div class="col-3 col-s-3 menu">
+  <ul>
+		<a href="/contacts">
+    <li>all </li>
+		</a>
+
+		{%for group in groups%}
+		<a href="/contacts/{{group.id}}">
+    <li>{{group.name}} </li>
+		</a>
+		{% endfor %}
+
+			<a href="/add_grp">
+	    <li>+ + + add group + + + </li>
+			</a>
+
+  </ul>
+</div>
+
+<div style="direction:rtl"  class="col-6 col-s-9">
+  <h1>خوش آمدید</h1>
+  <p>در این سایت شما می توانید شماره تلفن و ایمیل مورد نظر را ذخیره کنید.</p>
+	<div >
+
+<a href="{% url 'add'%}">
+	<div class="div1" style="background-color:pink;text-align: center;font-size:40px;">
+<b>افزودن + <b>
+</diV></a>
+
+
+{% for contact in contacts.all %}
+<div class="div1" >
+<div class="div2">
+{{contact.name}} &nbsp&nbsp{{contact.number}} &nbsp&nbsp
+<div style="float:left">
+	{% if grp_id %}
+  <a href="/contacts/{{grp_id}}/delete/{{contact.id}}" >
+		{% else %}
+		<a href="/contacts/delete/{{contact.id}}" >
+		{% endif %}
+		<img class="star" src="{% static 'delete.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+  <a href="/contacts/update/{{contact.id}}" ><img class="star" src="{% static 'edit.png' %}" alt="rate" width="40" height=auto></a> &nbsp
+</div></div></div>
+{% endfor %}
+
+</div>
+</div>
+
+{%endblock%}
+>>>>>>> 2a6c62489d1acf598d77c6946474d1a50c5119bc

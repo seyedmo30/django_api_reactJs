@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+### Django ###
+
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+/media
+/static
+/tamrin_react
+=======
+### Django ###
+
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+/media
+/static
+>>>>>>> 2a6c62489d1acf598d77c6946474d1a50c5119bc
